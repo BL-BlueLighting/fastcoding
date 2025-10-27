@@ -59,43 +59,38 @@ function getEnd($__un)
     <head>
         <title><?php echo $OJ_NAME?> - FastCoding - 首页</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            a {
+                text-decoration: none;
+            }
+        </style>
     </head>
     <body>
         <?php include "./nav.php"; ?>
         <main style="margin-top: 27px; margin-left: 27px;">
             <center>
                 <img src="./src/img.png" style="width: 640px; height: 360px;">
-            </center>
-
-            <div class="row" style="margin-top: 27px;">
-
-                <div class="col">
+                <div class="content" style="width: 1000px;">
                     <h1>FastCoding</h1>
                     <h3>-&nbsp;The&nbsp;&nbsp;race&nbsp;&nbsp;of&nbsp;&nbsp;Coding!&nbsp;-</h3>
                     <h5>游戏结束。</h5>
                     <h5>您的 RaceID: <?php echo $race_id; ?></h5>
-                    <?php foreach ($joiners as $joiner):?>
-                        <div class="col-md-3 mb-4">
-                            <div class="card">
-                                <img src="<?php echo getAvatar($joiner); ?>" class="card-img-top" alt="用户头像">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        <a href="/userinfo.php?user=<?php echo $joiner; ?>"><?php echo $joiner;?> - <?php echo getEnd($joiner); ?></a>
-                                    </h5>
+                    <div class="row">
+                        <?php foreach ($joiners as $joiner):?>
+                            <div class="col-md-3 mb-4">
+                                <div class="card" style="width: 200px;">
+                                    <img src="<?php echo getAvatar($joiner); ?>" class="card-img-top" alt="用户头像" style="width: 200px; height: 200px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href="/userinfo.php?user=<?php echo $joiner; ?>"><?php echo $joiner;?><br/><?php echo getEnd($joiner); ?></a>
+                                        </h5>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach?>
+                        <?php endforeach?>
+                    </div>
                 </div>
-                
-                <div class="col">
-                    <h3>继续新一场？</h3>
-                    <br/>
-                    <button type="button" class="btn btn-outline-info" onclick="javascript:window.location.href='./join.php';">开始游戏</button>
-                </div>
-
-            </div>
-
+            </center>
         </main>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

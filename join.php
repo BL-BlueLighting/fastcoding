@@ -47,6 +47,15 @@ if (isset($_GET ["race_id"])) {
         header("Location: ./game.php?race_id=new");
     }
 
+    $__joiners = explode(",", $joiners);
+
+    if (count($___joiners) > 8) {
+        if (!$err) {
+            $err = true;
+            $error_content = "房间已满。";
+        }
+    }
+
     if ($race ["Started"] || $err) {
         if (!$err) { // 防止两次判断
             $err = true;
@@ -57,7 +66,7 @@ if (isset($_GET ["race_id"])) {
     else {
         if ($race ["joiners"] == "") $race ["joiners"] . $un;
         else $race ["joiners"] . "," . $un;
-        $Sql = "update SET `joiners` = ? WHERE `join_id` = ? ";
+        $Sql = "update `fastcoding` SET `joiners` = ? WHERE `join_id` = ? ";
         pdo_query($Sql, $race ["joiners"], $raceid);
 
         header("Location: ./game.php?race_id=". $raceid);

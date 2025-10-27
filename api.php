@@ -114,7 +114,7 @@ else if ($act == "callAccepted") {
     else {
 
         // 读取 solution, race
-        $race = pdo_query("select problems from fastcoding where `join_id` = ?", $race_id) [0];
+        $race = pdo_query("select * from fastcoding where `join_id` = ?", $race_id) [0]; // fixed bug: only selected problems, no selected all, so write only one user.
         $problem = $race ["problems"];
         $solution = pdo_query("select * from solution where `user_id` = ? and `problem_id` = ? and `result` = 4", $_GET ["user_id"], $problem);
 
