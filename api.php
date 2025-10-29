@@ -147,9 +147,34 @@ else if ($act == "callAccepted") {
         $content = array(
             "status" => 1,
             "message" => "You accepted titles."
-        );
-        
+        );        
     }
 
     echo json_encode($content);
+}
+
+else if ($act == "callDeleteFastCoding") {
+    $content = array();
+    $sjoiners = pdo_query("select joiners from `fastcoding` where `join_id` = ?", $race_id);
+    $sfinished_joiners = pdo_query("select finished_users from `fastcoding` where `join_id` = ?", $race_id);
+    $joiners = count(explode(",", $sjoiners));
+    $finished_joiners = count(explode(",", $sfinished_joiners));
+
+    if ($joiners == $finished_joiners) {
+
+        $sql = "delete from `fastcoding` where `join_id` = ?";
+        pdo_query($sql, $race_id);
+
+        $content = array(
+            "status" => 1,
+            "message" => "Successfully to delete fastcoding."
+        );
+
+    }
+    else {
+        $content = array(
+            "status" => 1,
+            "message" => "Failed to delete fastcoding because someone not finished."
+        );
+    }
 }

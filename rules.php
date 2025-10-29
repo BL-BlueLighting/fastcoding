@@ -30,6 +30,8 @@ require_once "./config.php";
                 <p>4. 本游戏会随机从题库中抽取 <?php echo $NEED_TITLES?> 道题目，并打乱，<b>并且不会同步您之前写过的任何代码</b>。</p>
                 <p>5. 本游戏的最长时间为 <?php echo $MAX_TIME?> 分钟，请在时间内完成所有题目。（当然每个人有不同的实力，你可以做不完。）</p>
                 <p>6. 不允许使用 <span class="badge bg-secondary">Ctrl + C</span> <span class="badge bg-secondary">Ctrl + V</span> 等复制快捷键，任何试图复制粘贴的内容均会被记录。<p>
+                <h4>显示问题</h4>
+                <p>若您看见一个没有头像的人进入房间，并且页面布局乱了，请不要慌张。这是因为 Gravatar 服务没有在您的计算机上生成缓存，多刷新几次页面即可。</p>
                 <h3>最后，祝您玩的愉快！</h3>
             </div>
         </main>

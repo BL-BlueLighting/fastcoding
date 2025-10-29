@@ -94,5 +94,41 @@ function getEnd($__un)
         </main>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            async function sendPostRequest(api, data) {
+                const formData = new URLSearchParams();
+                for (const key in data) {
+                    formData.append(key, data[key]);
+                }
+
+                try {
+                    const response = await fetch(api, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP Error! Status: ${response.status}`);
+                    }
+
+                    return await response.json();
+
+                } catch (error) {
+                    console.error('API Request Failed:', error);
+                    document.getElementById('submitMessage').innerHTML = `<span class="text-danger">API请求失败: ${error.message}</span>`;
+                    return { status: 'error', message: error.message };
+                }
+            }
+
+
+            let intervalEntity = setInterval(function() {
+                let race_id = "<?php echo $race_id ?>";
+                let result = sendPostRequest(`./api.php?act=callDeleteFastCoding&race_id=${race_id}`);
+
+                if (result.status == 1) {
+                    clearInterval(intervalEntity);
+                }
+            },1000)
+        </script>
     </body>
 </html>
