@@ -1,5 +1,5 @@
 <?php
-require_once "./config.php";
+require_once "../system/config.php";
 
 /*
 fastcoding table:
@@ -94,10 +94,10 @@ if (isset($_GET["err"])) {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <?php include "./nav.php"; ?>
+        <?php include "../nav.php"; ?>
         <main style="margin-top: 27px; margin-left: 27px;">
             <center>
-                <img src="./src/img.png" style="width: 640px; height: 360px;">
+                <img src="../src/img.png" style="width: 640px; height: 360px;">
             </center>
             <div class="left" style="margin-top: 27px;">
                 <h1>FastCoding</h1>

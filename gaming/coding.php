@@ -1,5 +1,5 @@
 <?php
-include './config.php';
+include '../system/config.php';
 
 /*
 FastCoding 最核心部分 - coding.php
@@ -63,7 +63,7 @@ if (!isset($un)) {
     </style>
 </head>
 <body>
-    <?php include "./nav.php"; ?>
+    <?php include "../nav.php"; ?>
 
     <main style="margin-top: 27px; margin-left: 27px; margin-right: 27px;">
 
@@ -172,8 +172,8 @@ if (!isset($un)) {
         // ====================================================================
         // PHP 变量注入到 JavaScript
         // ====================================================================
-        const API_ENDPOINT = 'judged_api.php'; // 你的提交 API 文件
-        const RACE_API_ENDPOINT = 'api.php'; // 你的竞赛 API 文件
+        const API_ENDPOINT = './api/judged_api.php'; // 你的提交 API 文件
+        const RACE_API_ENDPOINT = './api/api.php'; // 你的竞赛 API 文件
         const CURRENT_PROBLEM_ID = <?php echo $problem_id; ?>;
         const CURRENT_USER_ID = '<?php echo $un; ?>'; 
         const POLL_INTERVAL_MS = 2500; // 提交结果轮询间隔

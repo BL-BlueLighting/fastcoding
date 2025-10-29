@@ -6,7 +6,7 @@
  */
 
 // 引入 hustoj 的配置和常量文件
-include './config.php';
+include '../system/config.php';
 include '../include/const.inc.php';
 
 // Array($MSG_Pending,$MSG_Pending_Rejudging,$MSG_Compiling,$MSG_Running_Judging,$MSG_Accepted,$MSG_Presentation_Error,$MSG_Wrong_Answer,$MSG_Time_Limit_Exceed,$MSG_Memory_Limit_Exceed,$MSG_Output_Limit_Exceed,$MSG_Runtime_Error,$MSG_Compile_Error,$MSG_Compile_OK,$MSG_TEST_RUN,$MSG_MANUAL_CONFIRMATION,$MSG_SUBMITTING,$MSG_REMOTE_PENDING,$MSG_REMOTE_JUDGING);

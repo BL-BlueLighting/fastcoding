@@ -1,5 +1,5 @@
 <?php
-include "./config.php";
+include "../system/config.php";
 
 if (file_exists("./install.lock")) {
     echo "为了安全起见，每次运行该脚本会生成 install.lock 文件，请删除该文件再试。";

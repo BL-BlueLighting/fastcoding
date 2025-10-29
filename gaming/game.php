@@ -7,7 +7,7 @@
 FastCoding 主要游戏逻辑
 */
 
-include './config.php';
+include '../system/config.php';
 
 // 1. 通过 race_id 取得 fastcoding 项目，如果为 new 则为创建一个新游戏。
 if (!isset($_GET ["race_id"])) {
@@ -97,10 +97,10 @@ if ($result) {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <?php include "./nav.php"; ?>
+        <?php include "../nav.php"; ?>
         <main style="margin-top: 27px; margin-left: 27px; text-align: center;">
             <center>
-                <img src="./src/img.png" style="width: 640px; height: 360px;">
+                <img src="../src/img.png" style="width: 640px; height: 360px;">
             </center>
             <br/>
             <div class="row">

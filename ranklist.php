@@ -1,5 +1,5 @@
 <?php
-require_once "./config.php";
+require_once "./system/config.php";
 ?>
 <!doctype html>
 <html data-bs-theme="dark">

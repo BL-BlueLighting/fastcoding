@@ -3,7 +3,7 @@
 /*
 FastCoding 前端 API.
 */
-include './config.php';
+include '../system/config.php';
 
 if (!isset($_GET ["act"]) || !isset($_GET ["race_id"])) {
     echo "{'status': 0}";

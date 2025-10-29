@@ -1,5 +1,5 @@
 <?php
-require_once "./config.php";
+require_once "../system/config.php";
 
 if (!isset($_GET["race_id"])) {
     header(
@@ -66,10 +66,10 @@ function getEnd($__un)
         </style>
     </head>
     <body>
-        <?php include "./nav.php"; ?>
+        <?php include "../nav.php"; ?>
         <main style="margin-top: 27px; margin-left: 27px;">
             <center>
-                <img src="./src/img.png" style="width: 640px; height: 360px;">
+                <img src="../src/img.png" style="width: 640px; height: 360px;">
                 <div class="content" style="width: 1000px;">
                     <h1>FastCoding</h1>
                     <h3>-&nbsp;The&nbsp;&nbsp;race&nbsp;&nbsp;of&nbsp;&nbsp;Coding!&nbsp;-</h3>
@@ -123,7 +123,7 @@ function getEnd($__un)
 
             let intervalEntity = setInterval(function() {
                 let race_id = "<?php echo $race_id ?>";
-                let result = sendPostRequest(`./api.php?act=callDeleteFastCoding&race_id=${race_id}`);
+                let result = sendPostRequest(`./api/api.php?act=callDeleteFastCoding&race_id=${race_id}`);
 
                 if (result.status == 1) {
                     clearInterval(intervalEntity);
