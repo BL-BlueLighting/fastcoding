@@ -26,6 +26,7 @@ if (!isset($_SESSION[$OJ_NAME.'_'.'user_id']) && $DEBUGGING == false) {
     exit(0);
 }
 $un = $_SESSION[$OJ_NAME . "_user_id"];
+static $COJ_NAME = $OJ_NAME;// 为 php_api.php 擦屁股，保留原来的 OJ_NAME
 static $OJ_NAME = "Fast CODING";
 
 // Q: 为什么把 OJ_NAME 放在最后？
