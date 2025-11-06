@@ -32,7 +32,7 @@ require_once "./system/config.php";
                 <div class="col">
                     <h3>加入一场游戏</h3>
                     <br/>
-                    <button type="button" class="btn btn-outline-info" onclick="javascript:window.location.href='./join.php';">开始游戏</button>
+                    <button type="button" class="btn btn-outline-info" onclick="javascript:window.location.href='./gaming/join.php';">开始游戏</button>
                 </div>
 
             </div>

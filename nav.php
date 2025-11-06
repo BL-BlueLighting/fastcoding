@@ -7,7 +7,7 @@
                             <a class="nav-link" href="<?php echo $WHERE_IS_FASTCODING; ?>index.php">首页</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo $WHERE_IS_FASTCODING; ?>join.php">加入</a>
+                            <a class="nav-link" href="<?php echo $WHERE_IS_FASTCODING; ?>/gaming/join.php">加入</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/">返回 OJ</a>
