@@ -2,10 +2,7 @@
 require_once "../system/config.php";
 
 if (!isset($_GET["race_id"])) {
-    header(
-        "Location: ./index.php"
-    );
-
+    header("Location: ./index.php");
     exit;
 }
 
@@ -14,6 +11,11 @@ $race_id = $_GET["race_id"];
 $sql = "select joiners from `fastcoding` where `join_id` = ?";
 $_joiners = pdo_query($sql, $race_id) [0] ["joiners"];
 $joiners = explode(",", $_joiners);
+
+$notfinish = false;
+if (isset($_GET["stat"]) && $_GET["stat"] == "notfinish") {
+    $notfinish = true;
+}
 
 // 查 email 数据
 function getAvatar ($__un) {
@@ -46,55 +48,222 @@ function getEnd($__un)
     $result = explode(",", $__result);
 
     if (in_array($__un, $result)) {
-        return "<font style=\"color: green;\">ACCEPTED</font>";
+        return "<span class='status-badge status-accepted'><i class='fas fa-check-circle'></i> ACCEPTED</span>";
     }
     else {
-        return "<font style=\"color: red;\">WRITING</font>";
+        return "<span class='status-badge status-pending'><i class='fas fa-clock'></i> WRITING</span>";
     }
 } 
 ?>
 
 <!doctype html>
-<html data-bs-theme="dark">
+<html>
     <head>
-        <title><?php echo $OJ_NAME?> - FastCoding - 首页</title>
+        <title><?php echo $OJ_NAME?> - FastCoding - 游戏结束</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../fastcoding.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <style>
-            a {
+            .results-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            
+            .player-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 25px;
+                margin-top: 30px;
+            }
+            
+            .player-card {
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                overflow: hidden;
+                transition: all 0.3s ease;
+                text-align: center;
+            }
+            
+            .player-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            }
+            
+            .player-avatar {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                border-bottom: 3px solid var(--primary-color);
+            }
+            
+            .player-info {
+                padding: 20px;
+            }
+            
+            .player-name {
+                font-weight: 600;
+                margin-bottom: 10px;
+                color: #333;
+            }
+            
+            .player-link {
+                color: inherit;
                 text-decoration: none;
+                transition: color 0.3s ease;
+            }
+            
+            .player-link:hover {
+                color: var(--primary-color);
+            }
+            
+            .status-badge {
+                padding: 8px 15px;
+                border-radius: 20px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                display: inline-block;
+            }
+            
+            .status-accepted {
+                background: var(--success-color);
+                color: white;
+            }
+            
+            .status-pending {
+                background: var(--warning-color);
+                color: #333;
+            }
+            
+            .race-info {
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                color: white;
+                padding: 20px;
+                border-radius: 15px;
+                margin-bottom: 30px;
+                text-align: center;
+            }
+            
+            .action-buttons {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+            
+            .winner-crown {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                background: gold;
+                color: #333;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            }
+            
+            .player-card-wrapper {
+                position: relative;
+            }
+            
+            @media (max-width: 768px) {
+                .player-grid {
+                    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                }
+                
+                .action-buttons {
+                    flex-direction: column;
+                    align-items: center;
+                }
             }
         </style>
     </head>
     <body>
         <?php include "../nav.php"; ?>
-        <main style="margin-top: 27px; margin-left: 27px;">
-            <center>
-                <img src="../src/img.png" style="width: 640px; height: 360px;">
-                <div class="content" style="width: 1000px;">
-                    <h1>FastCoding</h1>
-                    <h3>-&nbsp;The&nbsp;&nbsp;race&nbsp;&nbsp;of&nbsp;&nbsp;Coding!&nbsp;-</h3>
-                    <h5>游戏结束。</h5>
-                    <h5>您的 RaceID: <?php echo $race_id; ?></h5>
-                    <div class="row">
-                        <?php foreach ($joiners as $joiner):?>
-                            <div class="col-md-3 mb-4">
-                                <div class="card" style="width: 200px;">
-                                    <img src="<?php echo getAvatar($joiner); ?>" class="card-img-top" alt="用户头像" style="width: 200px; height: 200px;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            <a href="/userinfo.php?user=<?php echo $joiner; ?>"><?php echo $joiner;?><br/><?php echo getEnd($joiner); ?></a>
-                                        </h5>
-                                    </div>
+        
+        <div class="results-container">
+            <!-- 头部 -->
+            <div class="fastcoding-header fade-in">
+                <h1 class="fastcoding-title">FastCoding</h1>
+                <p class="fastcoding-subtitle">- The race of Coding! -</p>
+            </div>
+
+            <!-- 游戏结束信息 -->
+            <div class="race-info fade-in">
+                <h2><i class="fas fa-flag-checkered"></i> 游戏结束</h2>
+                <p class="mb-0">比赛 RaceID: <strong><?php echo $race_id; ?></strong></p>
+            </div>
+
+            <?php if ($notfinish): ?>
+                <div class="alert alert-warning fade-in" role="alert">
+                    <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> 注意！</h4>
+                    <p>比赛时间已到，但并非所有参赛者都完成了比赛，且比赛已经被删除，因此将不会显示玩家列表。</p>
+                </div>
+            <?php else: ?>
+            <!-- 玩家结果 -->
+            <div class="fastcoding-card fade-in">
+                <div class="card-header">
+                    <h2 class="card-title">比赛结果</h2>
+                    <span><?php echo count($joiners); ?> 位参赛者</span>
+                </div>
+                
+                <div class="player-grid">
+                    <?php 
+                    $first_player = true; // 标记第一个完成的玩家
+                    foreach ($joiners as $joiner): 
+                    ?>
+                        <div class="player-card-wrapper">
+                            <div class="player-card">
+                                <img src="<?php echo getAvatar($joiner); ?>" class="player-avatar" alt="<?php echo $joiner; ?>的头像" 
+                                     onerror="this.src='https://ui-avatars.com/api/?name=<?php echo $joiner; ?>&background=random&size=200'">
+                                <div class="player-info">
+                                    <h5 class="player-name">
+                                        <a href="/userinfo.php?user=<?php echo $joiner; ?>" class="player-link">
+                                            <?php echo $joiner; ?>
+                                        </a>
+                                    </h5>
+                                    <?php echo getEnd($joiner); ?>
                                 </div>
                             </div>
-                        <?php endforeach?>
-                    </div>
+                            <?php 
+                            // 假设第一个完成的玩家是胜利者（这里可以根据实际逻辑调整）
+                            if ($first_player): 
+                                $first_player = false;
+                            ?>
+                                <div class="winner-crown">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-            </center>
-        </main>
+            </div>
+            <?php endif; ?>
+
+            <!-- 操作按钮 -->
+            <div class="action-buttons">
+                <a href="./join.php" class="btn btn-primary">
+                    <i class="fas fa-gamepad"></i> 开始新游戏
+                </a>
+                <a href="../index.php" class="btn btn-outline-primary">
+                    <i class="fas fa-home"></i> 返回首页
+                </a>
+                <a href="../ranklist.php" class="btn btn-success">
+                    <i class="fas fa-trophy"></i> 查看排行榜
+                </a>
+            </div>
+        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script>
+            // 删除FastCoding记录的轮询
             async function sendPostRequest(api, data) {
                 const formData = new URLSearchParams();
                 for (const key in data) {
@@ -115,20 +284,23 @@ function getEnd($__un)
 
                 } catch (error) {
                     console.error('API Request Failed:', error);
-                    document.getElementById('submitMessage').innerHTML = `<span class="text-danger">API请求失败: ${error.message}</span>`;
                     return { status: 'error', message: error.message };
                 }
             }
 
-
             let intervalEntity = setInterval(function() {
                 let race_id = "<?php echo $race_id ?>";
-                let result = sendPostRequest(`./api/api.php?act=callDeleteFastCoding&race_id=${race_id}`);
-
-                if (result.status == 1) {
-                    clearInterval(intervalEntity);
-                }
-            },1000)
+                sendPostRequest(`./api.php?act=callDeleteFastCoding&race_id=${race_id}`)
+                    .then(result => {
+                        if (result.status == 1) {
+                            clearInterval(intervalEntity);
+                            console.log("FastCoding记录已删除");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("删除记录时出错:", error);
+                    });
+            }, 1000);
         </script>
     </body>
 </html>

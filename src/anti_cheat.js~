@@ -1,6 +1,7 @@
 // anti_cheat.js (重构版)
 
 // 开发模式禁用 anticheat
+if (typeof DEBUGGING !== 'undefined' && DEBUGGING) throw Error("deving no anti cheat");
 
 let editor; // will be set after monaco init
 
@@ -32,9 +33,6 @@ require(['vs/editor/editor.main'], function() {
     // 在 editor 创建后初始化 anti-cheat
     initAntiCheat(editor);
 });
-
-
-if (typeof DEBUGGING !== 'undefined' && DEBUGGING) throw Error("deving no anti cheat");
 
 // ----------------- anti-cheat 初始化函数 -----------------
 function initAntiCheat(ed) {
