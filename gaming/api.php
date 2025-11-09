@@ -65,7 +65,7 @@ else if ($act == "getAvatar") {
             );
         }
         else {
-            $grav_url = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?size=100";
+            $grav_url = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?size=500";
             $content = array(
                 "status" => 1,
                 "avatar" => $grav_url
