@@ -144,7 +144,11 @@ if (!empty($result)) {
                     <h2 class="card-title">比赛信息</h2>
                     <div class="race-id-display">
                         <span>Race ID: <strong><?php echo $race["join_id"]?></strong></span>
+<<<<<<< HEAD
                         <button type="button" class="btn btn-primary btn-sm" id="btncopy">
+=======
+                        <button type="button" class="btn btn-primary btn-sm" onclick="copyToClipboard()">
+>>>>>>> c0956bc7d8954c7e12687e4be2f7b701dd92b056
                             <i class="fas fa-copy"></i> 复制
                         </button>
                     </div>
@@ -189,6 +193,7 @@ if (!empty($result)) {
         </div>
 
         <script>
+<<<<<<< HEAD
             document.getElementById("btncopy").addEventListener("click", async function () {
                 const join_id = "<?php echo $race["join_id"] ?>";
 
@@ -223,6 +228,38 @@ if (!empty($result)) {
                     showAlert('复制失败，请手动复制', 'error');
                 }
             });
+
+            function showAlert(message, type) {
+                // 创建临时提示
+                const alertDiv = document.createElement('div');
+                alertDiv.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show`;
+                alertDiv.style.position = 'fixed';
+                alertDiv.style.top = '20px';
+                alertDiv.style.right = '20px';
+                alertDiv.style.zIndex = '9999';
+                alertDiv.innerHTML = `
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                document.body.appendChild(alertDiv);
+                
+                // 3秒后自动移除
+                setTimeout(() => {
+                    if (alertDiv.parentNode) {
+                        alertDiv.parentNode.removeChild(alertDiv);
+                    }
+                }, 3000);
+=======
+            function copyToClipboard() {
+                var join_id = "<?php echo $race["join_id"] ?>";
+                navigator.clipboard.writeText(join_id).then(function() {
+                    // 显示成功提示
+                    showAlert('Race ID 已复制到剪贴板！', 'success');
+                }).catch(function() {
+                    showAlert('复制失败，请手动复制', 'error');
+                });
+>>>>>>> c0956bc7d8954c7e12687e4be2f7b701dd92b056
+            }
 
             function showAlert(message, type) {
                 // 创建临时提示

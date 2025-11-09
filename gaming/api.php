@@ -197,6 +197,7 @@ else if ($act == "callDeleteFastCoding") {
         );
     }
 }
+<<<<<<< HEAD
 
 // 延长时间
 else if ($act == "extendTime") {
@@ -228,3 +229,5 @@ else if ($act == "extendTime") {
 
     echo json_encode($content);
 }
+=======
+>>>>>>> c0956bc7d8954c7e12687e4be2f7b701dd92b056

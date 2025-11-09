@@ -24,11 +24,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
+<<<<<<< HEAD
                             <a class="nav-link fastcoding-nav-link" href="<?php echo $WHERE_IS_FASTCODING; ?>/all_fastcodings.php">
                                 <i class="fas fa-list"></i> 所有游戏
                             </a>
                         </li>
                         <li class="nav-item">
+=======
+>>>>>>> c0956bc7d8954c7e12687e4be2f7b701dd92b056
                             <a class="nav-link fastcoding-nav-link" href="/">
                                 <i class="fas fa-arrow-left"></i> 返回 OJ
                             </a>

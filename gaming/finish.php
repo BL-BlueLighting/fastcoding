@@ -201,12 +201,15 @@ function getEnd($__un)
                 <p class="mb-0">比赛 RaceID: <strong><?php echo $race_id; ?></strong></p>
             </div>
 
+<<<<<<< HEAD
             <?php if ($notfinish): ?>
                 <div class="alert alert-warning fade-in" role="alert">
                     <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> 注意！</h4>
                     <p>比赛时间已到，但并非所有参赛者都完成了比赛，且比赛已经被删除，因此将不会显示玩家列表。</p>
                 </div>
             <?php else: ?>
+=======
+>>>>>>> c0956bc7d8954c7e12687e4be2f7b701dd92b056
             <!-- 玩家结果 -->
             <div class="fastcoding-card fade-in">
                 <div class="card-header">
@@ -245,7 +248,10 @@ function getEnd($__un)
                     <?php endforeach; ?>
                 </div>
             </div>
+<<<<<<< HEAD
             <?php endif; ?>
+=======
+>>>>>>> c0956bc7d8954c7e12687e4be2f7b701dd92b056
 
             <!-- 操作按钮 -->
             <div class="action-buttons">
@@ -255,7 +261,11 @@ function getEnd($__un)
                 <a href="../index.php" class="btn btn-outline-primary">
                     <i class="fas fa-home"></i> 返回首页
                 </a>
+<<<<<<< HEAD
                 <a href="../ranklist.php" class="btn btn-success">
+=======
+                <a href="./ranklist.php" class="btn btn-success">
+>>>>>>> c0956bc7d8954c7e12687e4be2f7b701dd92b056
                     <i class="fas fa-trophy"></i> 查看排行榜
                 </a>
             </div>

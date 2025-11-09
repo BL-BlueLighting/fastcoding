@@ -142,10 +142,16 @@ if (!isset($un)) {
                     <p class="mb-0">当前用户: <?php echo htmlspecialchars($un); ?> | FASTCODING - HARD MODE</p>
                 </div>
                 <div class="col-md-4 text-end">
+<<<<<<< HEAD
                     <button onclick="javascript:window.open('/problem.php?id=<?php echo $problem_id;?>', '_blank', 'popup=true')" class="btn btn-light">
                         <i class="fas fa-eye"></i> 查看题目
                     </button>
                     <div id="countdown" class="mt-2 text-muted small"></div>
+=======
+                    <a href="/problem.php?id=<?php echo $problem_id;?>" class="btn btn-light">
+                        <i class="fas fa-eye"></i> 查看题目
+                    </a>
+>>>>>>> c0956bc7d8954c7e12687e4be2f7b701dd92b056
                 </div>
             </div>
         </div>
@@ -517,6 +523,7 @@ if (!isset($un)) {
                 }
             }, POLL_INTERVAL_MS);
         }
+<<<<<<< HEAD
 
         // 倒计时显示
         let countdownElement = document.getElementById("countdown");
@@ -580,6 +587,8 @@ if (!isset($un)) {
         setInterval(updateCountdown, 1000);
         // 初始加载
         updateCountdown();
+=======
+>>>>>>> c0956bc7d8954c7e12687e4be2f7b701dd92b056
     </script>
 
     <!-- 隐藏的textarea用于表单提交 -->
